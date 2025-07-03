@@ -1,0 +1,25 @@
+--- postgresql-15.spec
++++ postgresql-15.spec
+@@ -110,6 +110,11 @@ Patch1:		%{sname}-%{pgmajorversion}-rpm-pgsql.patch
+ Patch3:		%{sname}-%{pgmajorversion}-conf.patch
+ Patch5:		%{sname}-%{pgmajorversion}-var-run-socket.patch
+ Patch6:		%{sname}-%{pgmajorversion}-perl-rpath.patch
++Patch10:	pg%{pgmajorversion}-010-allow_logical_decoding_on_standbys.diff
++Patch15:	pg%{pgmajorversion}-015-attoptions.diff
++Patch20:	pg%{pgmajorversion}-020-LOG-to-DEBUG1.diff
++Patch25:	pg%{pgmajorversion}-025-logical_commit_clock.diff
++Patch30:	pg%{pgmajorversion}-030-per-subtrans-commit-ts.diff
+ 
+ BuildRequires:	perl glibc-devel bison flex >= 2.5.31
+ BuildRequires:	gcc-c++
+@@ -577,6 +582,11 @@ benchmarks.
+ %patch -P 3 -p0
+ %patch -P 5 -p0
+ %patch -P 6 -p0
++%patch -P 10 -p1
++%patch -P 15 -p1
++%patch -P 20 -p1
++%patch -P 25 -p1
++%patch -P 30 -p1
+ 
+ %{__cp} -p %{SOURCE12} .

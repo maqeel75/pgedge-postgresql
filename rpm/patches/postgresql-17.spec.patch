@@ -1,0 +1,25 @@
+--- postgresql-17.spec
++++ postgresql-17.spec
+@@ -75,6 +75,11 @@
+ Patch3:		%{sname}-%{pgmajorversion}-conf.patch
+ Patch5:		%{sname}-%{pgmajorversion}-var-run-socket.patch
+ Patch6:		%{sname}-%{pgmajorversion}-perl-rpath.patch
++Patch15:	pg%{pgmajorversion}-015-attoptions.diff
++Patch20:	pg%{pgmajorversion}-020-LOG-to-DEBUG1.diff
++Patch25:	pg%{pgmajorversion}-025-logical_commit_clock.diff
++Patch30:	pg%{pgmajorversion}-030-per-subtrans-commit-ts.diff
++Patch90:	pg%{pgmajorversion}-090-init_template_fix.diff
+ 
+ BuildRequires:	perl glibc-devel bison >= 2.3 flex >= 2.5.35
+ BuildRequires:	gcc-c++
+@@ -432,6 +437,11 @@
+ %patch -P 3 -p0
+ %patch -P 5 -p0
+ %patch -P 6 -p0
++%patch -P 15 -p1
++%patch -P 20 -p1
++%patch -P 25 -p1
++%patch -P 30 -p1
++%patch -P 90 -p1
+ 
+ %{__cp} -p %{SOURCE12} .
