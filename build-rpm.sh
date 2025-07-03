@@ -28,7 +28,7 @@ prepare() {
 
   echo "Applying postgresql spec patch ..."
   if [ -f "rpm/patches/postgresql-${PG_MAJOR_VERSION}.spec.patch" ]; then
-    patch -d ~/rpmbuild/SPECS -p0 < "/rpm/patches/postgresql-${PG_MAJOR_VERSION}.spec.patch"
+    patch -d ~/rpmbuild/SPECS -p0 < "rpm/patches/postgresql-${PG_MAJOR_VERSION}.spec.patch"
     sed -i 's|%{sname}%{pgmajorversion}|pgedge-%{sname}%{pgmajorversion}|g' ~/rpmbuild/SPECS/postgresql-${PG_MAJOR_VERSION}.spec
     sed -i 's|PGDG||g' ~/rpmbuild/SPECS/postgresql-${PG_MAJOR_VERSION}.spec
   else
