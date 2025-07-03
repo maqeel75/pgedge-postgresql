@@ -10,8 +10,8 @@ PKG_OUTPUT="/output"
 
 prepare() {
   echo "Installing build tools and dependencies..."
-  apt-get update
-  apt-get install -y devscripts build-essential fakeroot git curl \
+  sudo apt-get update
+  sudo apt-get install -y devscripts build-essential fakeroot git curl \
     ca-certificates debhelper dpkg-dev gnupg
 
   echo "Cloning PostgreSQL Debian packaging repo..."
@@ -24,7 +24,7 @@ prepare() {
   export full_postgres_version
   echo "PostgreSQL full version: $full_postgres_version"
 
-  (cd /tmp && git clone https://salsa.debian.org/postgresql/postgresql-common.git && cd postgresql-common/pgdg && chmod 755 apt.postgresql.org.sh && YES=yes ./apt.postgresql.org.sh)  
+  (cd /tmp && git clone https://salsa.debian.org/postgresql/postgresql-common.git && cd postgresql-common/pgdg && chmod 755 apt.postgresql.org.sh && sudo YES=yes ./apt.postgresql.org.sh)  
 
   echo "Downloading source tarball..."
   curl -L "https://ftp.postgresql.org/pub/source/v${full_postgres_version}/postgresql-${full_postgres_version}.tar.bz2" \
@@ -52,9 +52,9 @@ prepare() {
 build() {
   echo "Installing build dependencies..."
   cd "$BUILD_DIR/postgresql-${full_postgres_version}"
-  apt-get update
-  apt install -y postgresql-common
-  apt-get build-dep -y .
+  sudo apt-get update
+  sudo apt install -y postgresql-common
+  sudo apt-get build-dep -y .
 
   echo "Building Debian package..."
   dpkg-buildpackage -us -uc -b
