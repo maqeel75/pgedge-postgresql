@@ -53,7 +53,7 @@ jobs:
 
 
       - name: Run PGEdge Builder Action
-        uses: ./github/actions/pgedge-builder-action
+        uses: .github/actions/pgedge-builder-action
         with:
           image: ${{ matrix.image }}
           arch: ${{ matrix.arch }}
