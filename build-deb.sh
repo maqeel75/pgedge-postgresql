@@ -61,12 +61,15 @@ build() {
   sudo apt-get build-dep -y .
 
   echo "Building Debian package..."
+  DISTRO=$(lsb_release -cs)
+  dch -D "$DISTRO" --force-distribution -v "${PG_VERSION}-1+${DISTRO}" "Rebuild PostgreSQL $PG_VERSION for $DISTRO"
+
   dpkg-buildpackage -us -uc -b
 }
 
 post_build() {
   echo "Copying .deb packages to output..."
   sudo mkdir -p "$PKG_OUTPUT"
-  cp "$BUILD_DIR"/*.deb "$PKG_OUTPUT" || echo "No .deb packages found."
+  sudo cp "$BUILD_DIR"/*.deb "$PKG_OUTPUT" || echo "No .deb packages found."
 }
 
