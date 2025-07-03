@@ -44,8 +44,16 @@ jobs:
       - name: Checkout pgedge-postgresql source
         uses: actions/checkout@v4
 
+      - name: Checkout private builder action (pgedge-builder-action)
+        uses: actions/checkout@v4
+        with:
+          repository: maqeel75/pgedge-builder-action
+          token: ${{ secrets.GH_WORKFLOW_SECRET }}
+          path: .github/actions/pgedge-builder-action
+
+
       - name: Run PGEdge Builder Action
-        uses: maqeel75/pgedge-builder-action@main
+        uses: ./github/actions/pgedge-builder-action
         with:
           image: ${{ matrix.image }}
           arch: ${{ matrix.arch }}
