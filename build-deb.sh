@@ -12,7 +12,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 prepare() {
   echo "Installing build tools and dependencies..."
-  ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+  sudo ln -fs /usr/share/zoneinfo/UTC /etc/localtime
 
   sudo apt-get update
   sudo apt-get install -y devscripts build-essential fakeroot git curl \
