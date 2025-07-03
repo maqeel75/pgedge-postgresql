@@ -22,6 +22,10 @@ jobs:
             arch: amd64
           - image: rockylinux:9
             arch: arm64
+          - image: rockylinux:10
+            arch: amd64
+          - image: rockylinux:10
+            arch: arm64
           - image: debian:bullseye
             arch: amd64
           - image: debian:bullseye
