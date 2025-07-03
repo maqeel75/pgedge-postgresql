@@ -66,7 +66,7 @@ build() {
 
 post_build() {
   echo "Copying .deb packages to output..."
-  mkdir -p "$PKG_OUTPUT"
+  sudo mkdir -p "$PKG_OUTPUT"
   cp "$BUILD_DIR"/*.deb "$PKG_OUTPUT" || echo "No .deb packages found."
 }
 
