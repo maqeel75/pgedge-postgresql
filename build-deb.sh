@@ -8,8 +8,12 @@ SRC_DIR="${BUILD_DIR}/src"
 PATCH_DIR="${BUILD_DIR}/spock"
 PKG_OUTPUT="/output"
 
+export DEBIAN_FRONTEND=noninteractive
+
 prepare() {
   echo "Installing build tools and dependencies..."
+  ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+
   sudo apt-get update
   sudo apt-get install -y devscripts build-essential fakeroot git curl \
     ca-certificates debhelper dpkg-dev gnupg
