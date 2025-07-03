@@ -49,11 +49,11 @@ jobs:
         with:
           repository: maqeel75/pgedge-builder-action
           token: ${{ secrets.GH_WORKFLOW_SECRET }}
-          path: ./.github/actions/pgedge-builder-action
+          path: .github/actions/pgedge-builder-action
 
 
       - name: Run PGEdge Builder Action
-        uses: .github/actions/pgedge-builder-action
+        uses: ./.github/actions/pgedge-builder-action
         with:
           image: ${{ matrix.image }}
           arch: ${{ matrix.arch }}
