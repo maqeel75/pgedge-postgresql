@@ -69,13 +69,19 @@ jobs:
           echo "📂 Workspace layout:"
           find . -type d -print
 
+      - name: Sanitize artifact name
+        id: sanitize
+        run: |
+          name="${{ matrix.image }}-${{ matrix.arch }}"
+          safe_name="${name//:/-}"
+          echo "safe_name=$safe_name" >> "$GITHUB_OUTPUT"
+
       - name: Upload built packages
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ replace(matrix.image, ':', '-') }}-${{ matrix.arch }}
+          name: ${{ steps.sanitize.outputs.safe_name }}
           path: ./output
-
 
   upload:
     name: Upload to Cloudsmith
