@@ -63,6 +63,12 @@ jobs:
           arch: ${{ matrix.arch }}
           pg_version: ${{ inputs.pg_version }}
 
+      - name: 📦 Debug: Full workspace layout
+        shell: bash
+        run: |
+          echo "📂 Workspace layout:"
+          find . -type d -print
+
       - name: Upload built packages
         if: always()
         uses: actions/upload-artifact@v4
