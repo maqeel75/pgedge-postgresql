@@ -16,32 +16,32 @@ jobs:
         include:
           - image: rockylinux:8
             arch: amd64
-          - image: rockylinux:8
-            arch: arm64
+          #- image: rockylinux:8
+          #  arch: arm64
           - image: rockylinux:9
             arch: amd64
-          - image: rockylinux:9
-            arch: arm64
+          #- image: rockylinux:9
+          #  arch: arm64
           #- image: rockylinux/rockylinux:10
           #  arch: amd64
           #- image: rockylinux/rockylinux:10
           #  arch: arm64
           - image: debian:bullseye
             arch: amd64
-          - image: debian:bullseye
-            arch: arm64
+          #- image: debian:bullseye
+          #  arch: arm64
           - image: debian:bookworm
             arch: amd64
-          - image: debian:bookworm
-            arch: arm64
+          #- image: debian:bookworm
+          #  arch: arm64
           - image: ubuntu:jammy
             arch: amd64
-          - image: ubuntu:jammy
-            arch: arm64
+          #- image: ubuntu:jammy
+          #  arch: arm64
           - image: ubuntu:noble
             arch: amd64
-          - image: ubuntu:noble
-            arch: arm64
+          #- image: ubuntu:noble
+          #  arch: arm64
 
     name: Build on ${{ matrix.image }} (${{ matrix.arch }})
     steps:
@@ -63,3 +63,18 @@ jobs:
           arch: ${{ matrix.arch }}
           pg_version: ${{ inputs.pg_version }}
 
+      - name: Checkout Cloudsmith uploader action
+        uses: actions/checkout@v4
+        with:
+          repository: maqeel75/cloudsmith-uploader-action
+          token: ${{ secrets.GH_WORKFLOW_SECRET }}
+          path: .github/actions/cloudsmith-uploader-action
+
+      - name: Upload packages to Cloudsmith
+        uses: ./.github/actions/cloudsmith-uploader-action
+        with:
+          directory: ./output
+          api_key: ${{ secrets.CLOUDSMITH_API_KEY }}
+          owner: maqeel
+          repo: pgedge
+          exclude: ""
