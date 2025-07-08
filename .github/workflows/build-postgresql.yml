@@ -73,7 +73,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: output-${{ matrix.arch }}
+          name: ${{ matrix.image }}-${{ matrix.arch }}
           path: ./output
 
 
