@@ -76,10 +76,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-    - name: Download all output artifacts
-      uses: actions/download-artifact@v4
-      with:
-        path: ./output
+      - name: Download all output artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./output
 
       - name: Checkout uploader action
         uses: actions/checkout@v4
