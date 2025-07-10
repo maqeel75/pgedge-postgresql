@@ -73,7 +73,8 @@ jobs:
         id: sanitize
         run: |
           name="${{ matrix.image }}-${{ matrix.arch }}"
-          safe_name="${name//:/-}"
+          base_name="${name##*/}"  # Extract part after the last /
+          safe_name="${base_name//:/-}"  # Replace : with -
           echo "safe_name=$safe_name" >> "$GITHUB_OUTPUT"
 
       - name: Upload built packages
