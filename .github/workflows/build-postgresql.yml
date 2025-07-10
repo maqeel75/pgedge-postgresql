@@ -63,12 +63,6 @@ jobs:
           arch: ${{ matrix.arch }}
           pg_version: ${{ inputs.pg_version }}
 
-      - name: Debug full workspace layout
-        shell: bash
-        run: |
-          echo "📂 Workspace layout:"
-          find . -type d -print
-
       - name: Sanitize artifact name
         id: sanitize
         run: |
