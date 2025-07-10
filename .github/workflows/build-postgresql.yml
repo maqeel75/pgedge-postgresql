@@ -22,8 +22,8 @@ jobs:
             arch: amd64
           #- image: rockylinux:9
           #  arch: arm64
-          #- image: rockylinux/rockylinux:10
-          #  arch: amd64
+          - image: rockylinux/rockylinux:10
+            arch: amd64
           #- image: rockylinux/rockylinux:10
           #  arch: arm64
           - image: debian:bullseye

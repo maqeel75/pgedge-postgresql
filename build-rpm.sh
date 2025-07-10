@@ -49,6 +49,10 @@ prepare() {
 
 build() {
   echo "Building RPM and SRPM..."
+  if [ "$RHEL" = "10" ]; then
+    # Disable rpath check for EL10
+    sed -i 's|QA_CHECK_RPATHS=1|QA_CHECK_RPATHS=0|g' ~/.rpmmacros
+  fi
   rpmbuild -ba ~/rpmbuild/SPECS/postgresql-${PG_MAJOR_VERSION}.spec \
   --define "pgmajorversion ${PG_MAJOR_VERSION}"
 
