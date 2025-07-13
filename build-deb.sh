@@ -70,6 +70,12 @@ build() {
 post_build() {
   echo "Copying .deb packages to output..."
   sudo mkdir -p "$PKG_OUTPUT"
+  # Rename .ddeb files to .deb files
+  pushd $BUILD_DIR
+  for file in $(ls | grep ddeb); do
+    mv "$file" "${file%.ddeb}.deb";
+  done
+  popd
   sudo cp "$BUILD_DIR"/*.deb "$PKG_OUTPUT" || echo "No .deb packages found."
 }
 
