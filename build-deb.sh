@@ -62,6 +62,7 @@ build() {
 
   echo "Building Debian package..."
   DISTRO=$(lsb_release -cs)
+  export DEB_BUILD_OPTIONS="compress=gzip"
   dch -D "$DISTRO" --force-distribution -v "${PG_VERSION}-1.${DISTRO}" "Rebuild PostgreSQL $PG_VERSION for $DISTRO"
 
   dpkg-buildpackage -us -uc -b
