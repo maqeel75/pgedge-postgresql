@@ -51,6 +51,8 @@ prepare() {
   sed -i -e '/tzdata-legacy/d' "$BUILD_DIR/postgresql-${full_postgres_version}/debian/control" || true
   sed -i -e 's/tzdata.*/tzdata,/' "$BUILD_DIR/postgresql-${full_postgres_version}/debian/tests/control" || true
   sed -i 's/postgresql-common-dev/postgresql-common/' $BUILD_DIR/postgresql-${full_postgres_version}/debian/control
+
+  echo -e "\noverride_dh_builddeb:\n\tdh_builddeb -- -Zgzip" >> $BUILD_DIR/postgresql-${full_postgres_version}/debian/rules
 }
 
 build() {
@@ -62,7 +64,6 @@ build() {
 
   echo "Building Debian package..."
   DISTRO=$(lsb_release -cs)
-  export DEB_BUILD_OPTIONS="compress=gzip"
   dch -D "$DISTRO" --force-distribution -v "${PG_VERSION}-1.${DISTRO}" "Rebuild PostgreSQL $PG_VERSION for $DISTRO"
 
   dpkg-buildpackage -us -uc -b
